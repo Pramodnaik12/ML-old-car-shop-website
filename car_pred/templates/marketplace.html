@@ -1,0 +1,32 @@
+<!-- templates/marketplace.html -->
+{% extends "base.html" %}
+
+{% block title %}Marketplace{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Available Cars</h1>
+    <div class="row">
+        {% for car in cars %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                {% if car.image %}
+                <img class="card-img-top" src="{{ url_for('views.display_image', filename=car.image) }}" alt="Car Image">
+                {% else %}
+                <img class="card-img-top" src="{{ url_for('views.display_image', filename='default-car.png') }}" alt="Default Car Image">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ car.car_name }} - {{ car.company }}</h5>
+                    <p class="card-text">Year: {{ car.year_of_purchase }}</p>
+                    <p class="card-text">Price: ${{ car.price }}</p>
+                    <p class="card-text">KMs Driven: {{ car.kms_driven }}</p>
+                    <p class="card-text">Fuel Type: {{ car.fuel_type }}</p>
+                    <p class="card-text">Address: {{ car.address }}</p>
+                    <p class="card-text bg-primary text-white p-2 rounded">Contact: {{ car.contact_details }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

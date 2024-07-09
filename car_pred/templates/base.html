@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head xmlns="http://www.w3.org/1999/xhtml">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"/>
+
+    <title>{% block title %}Home{% endblock %}</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+        <div class="navbar-nav">
+            {% if user.is_authenticated %}
+                <a class="nav-item nav-link" id="home" href="/">Home</a>
+                
+                {% if user.user_type == 'buyer' %}
+                <a class="nav-item nav-link" id="marketplace" href="/marketplace">Marketplace</a>
+                {% endif %}
+                <a class="nav-item nav-link" id="predict-price" href="/predict-price">Predict</a>
+                {% if user.user_type == 'seller' %}
+                <a class="nav-item nav-link" id="sell" href="/sell">Sell</a>
+                {% endif %}
+                 <a class="nav-item nav-link" id="admin" href="/marketplace" {% if not user.is_admin %}style="display:none;"{% endif %}>
+                marketplace</a>
+                <a class="nav-item nav-link" id="admin" href="/sell" {% if not user.is_admin %}style="display:none;"{% endif %}>
+                sell</a>
+                <a class="nav-item nav-link" id="admin" href="/admin" {% if not user.is_admin %}style="display:none;"{% endif %}>
+                admin</a>
+                
+                <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+
+               
+                
+            {% else %}
+                <a class="nav-item nav-link" id="login" href="/login">Login</a>
+                <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            {% if category == 'error' %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% else %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+<footer class="bg-dark text-white mt-4">
+    <div class="container py-4">
+        <div class="row">
+            <div class="col text-center">
+                <h5>Connect with us</h5>
+                <a href="https://www.facebook.com" class="text-white mx-2" target="_blank">
+                    <i class="fab fa-facebook fa-2x"></i>
+                </a>
+                <a href="https://www.twitter.com" class="text-white mx-2" target="_blank">
+                    <i class="fab fa-twitter fa-2x"></i>
+                </a>
+                <a href="https://www.instagram.com" class="text-white mx-2" target="_blank">
+                    <i class="fab fa-instagram fa-2x"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-qN6ZYFN1RbSoGGI4plkht7K3Qywr1OTq2a5Rt6AqO4BsnjQ5VUKU9k9Q4e2etKJN"
+        crossorigin="anonymous"></script>
+</body>
+</html>

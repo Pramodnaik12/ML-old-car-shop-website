@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  .background-image {
+    background-image: url('static/car_login.png');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Allows stacking cards vertically */
+  }
+  
+  .card-custom {
+    background: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 20px; /* Adds space between cards */
+  }
+</style>
+
+<div class="background-image">
+  <div class="card card-custom">
+    <div class="card-body text-center">
+      <h2 class="card-title">Car Buying/Selling</h2>
+    </div>
+  </div>
+
+  <div class="card card-custom">
+    <div class="card-body text-center">
+    {% if user.user_type=='buyer' or user.is_admin %}      
+    <button class="btn btn-primary" onclick="location.href='/marketplace'">Go to Marketplace</button>
+    {% endif %}
+    {% if user.user_type=='seller' or user.is_admin %}
+      <button class="btn btn-success" onclick="location.href='/sell'">Sell Your Car</button>
+      {% endif %}
+      <button class="btn btn-secondary" onclick="location.href='predict-price'">Predict Your Car Price</button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

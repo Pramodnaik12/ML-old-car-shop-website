@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .background-image {
+        background-image: url('static/car_login.png'); /* Update this path to your image */
+        background-size: cover;
+        background-position: center;
+        height: 100vh; /* Adjust the height as needed */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .login-form {
+        background: rgba(255, 255, 255, 0.8); /* Optional: Adds a light overlay for better readability */
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 600px;
+        width: 100%;
+    }
+
+    .login-form h1 {
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="background-image">
+    <div class="login-form">
+        <form method='POST'>
+            <div class="card-header" style="text-align: center">
+                <h1>Login</h1>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

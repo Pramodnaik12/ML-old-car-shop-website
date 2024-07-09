@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+
+<style>
+    .background-image {
+        background-image: url('static/car_signup.jpg'); /* Update this path to your image */
+        background-size: inherit;
+        background-position: center;
+        height: 100vh; /* Adjust the height as needed */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white; /* Ensure the text is readable */
+    }
+
+    .content-overlay {
+        background: rgba(0, 0, 0, 0.5); /* Optional: Adds a dark overlay for better readability */
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .content-overlay h2 {
+        margin-bottom: 20px;
+    }
+
+    .content-overlay .btn {
+        margin: 10px;
+    }
+</style>
+
+<div class="background-image">
+    <div class="content-overlay">
+        <h2>Choose Sign Up Type</h2>
+        <a class="btn btn-primary" href="{{ url_for('auth.sign_up_buyer') }}">Sign Up as Buyer</a>
+        <a class="btn btn-secondary" href="{{ url_for('auth.sign_up_seller') }}">Sign Up as Seller</a>
+    </div>
+</div>
+{% endblock %}
